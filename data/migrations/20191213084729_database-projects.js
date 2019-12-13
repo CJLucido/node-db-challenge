@@ -61,6 +61,7 @@ return knex.schema
     .defaultTo(0)
 
     tbl.integer('task_id')
+        .unique()
         .unsigned()
         .references('id')
         .inTable('tasks')
