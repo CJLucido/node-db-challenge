@@ -55,6 +55,8 @@ dbMethod.createTask(
 
  router.get('/tasks', (req, res) => {
 
+   
+
     dbMethod.getTasks()
         .then(tasks => {
             res.status(200).json(tasks)
@@ -65,7 +67,15 @@ dbMethod.createTask(
         })
  })
 
-
+function changeValue(req, res, next){
+    if(req.body.completed === 0){
+        return "false"
+    }else if(req.body.completed === 1){
+        return "true"
+    }else{
+        null
+    }
+}
 
 
 module.exports = router;
