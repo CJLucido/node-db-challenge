@@ -46,6 +46,19 @@ function getProjects(){
             .first()
 }
 
+function findResourceId(id){
+    return db('resources')
+            .select('*')
+            .where({id})
+            .first()
+}
+function findTaskId(id){
+    return db('tasks')
+            .select('*')
+            .where({id})
+            .first()
+}
+
    function createProject(projectData){
     return db('projects')
     .insert(projectData, 'id') 
@@ -57,21 +70,21 @@ function getProjects(){
    }
 
    function createResource(resourceData){
-    return db('schemes')
-            .insert(schemeData, 'id') 
+    return db('resources')
+            .insert(resourceData, 'id') 
             .then(ids =>{
                 const id = ids[0]
 
-               return findById(id)
+               return findResourceId(id)
             })
 }
 
 function createTask(taskData){
-    return db('schemes')
-            .insert(schemeData, 'id') 
+    return db('tasks')
+            .insert(taskData, 'id') 
             .then(ids =>{
                 const id = ids[0]
 
-               return findById(id)
+               return findTaskId(id)
             })
 }
