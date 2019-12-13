@@ -12,9 +12,21 @@ const dbMethod = require('./projects-model')
 
  dbMethod.createProject(
      {project_name: 'whatever',
- 
-
-}).then(projects => {console.log('this is new project', projects)})
+}).then(projects => {
+    // for(i = 0; i< projects.length; i++){
+    //     if(projects[i].completed == 0){
+    //         return (()=>{
+    //         projects[i].completed = "false"
+    //         console.log('this is new project', projects)}
+    //         )
+    //     }else{
+    //         return (()=>{
+    //             projects[i].completed = "true"
+    //             console.log('this is new project', projects)}
+    //             )
+    //     }
+    // }
+    console.log('this is new project', projects)})
 
 dbMethod.createResource(
     {resource_name: 'sawzaw',

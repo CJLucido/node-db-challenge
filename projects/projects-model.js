@@ -20,7 +20,18 @@ function getResources(){
 function getProjects(){
     return  db('projects')
        .select('*')
-      
+       .then(projects => {
+        return( projects.map(project => {
+
+          return  {
+                id: project.id,
+               project_name: project.project_name,
+                project_desc: project.project_desc,
+                completed: Boolean(project.completed),
+                task_id: project.task_id
+            }
+        }) )
+    })
    }
 
 
@@ -37,6 +48,18 @@ function getProjects(){
        
        )
         .join('projects', 'task_id', 'tasks.id')
+        .then(tasks => {
+            return( tasks.map(task => {
+    
+              return  {
+                    id: task.id,
+                    task_desc: task.task_desc,
+                    completed: Boolean(task.completed),
+                    project_name: task.project_name,
+                    project_desc: task.project_desc
+                }
+            }) )
+        })
    }
 
    function findById(id){
@@ -44,6 +67,21 @@ function getProjects(){
             .select('*')
             .where({id})
             .first()
+            .then(project => {
+               project => {
+        
+                  return  {
+                        id: project.id,
+                       project_name: project.project_name,
+                        project_desc: project.project_desc,
+                        completed: Boolean(project.completed),
+                        task_id: project.task_id
+                    }
+                }
+            })
+            //.update('complete',  Boolean())
+            // .where({complete: 1})
+            // .update({complete: true})
 }
 
 function findResourceId(id){
@@ -57,6 +95,18 @@ function findTaskId(id){
             .select('*')
             .where({id})
             .first()
+            .then(task => {
+           
+                  return  {
+                        id: task.id,
+                        task_desc: task.task_desc,
+                        completed: Boolean(task.completed),
+                        project_name: task.project_name,
+                        project_desc: task.project_desc
+                    }
+               
+            })
+
 }
 
    function createProject(projectData){
