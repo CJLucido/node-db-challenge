@@ -7,7 +7,8 @@ exports.seed = function(knex) {
       return knex('resources').insert([
         {resource_name: "wrench", resource_desc: 'make it'},
         {resource_name: "crowbar", resource_desc: 'shake it'},
-        {resource_name: "hammer", resource_desc: 'break it'}
+        {resource_name: "hammer", resource_desc: 'break it'},
+        {resource_name: "blow torch", resource_desc: 'bake it'}
       ]);
     });
 };

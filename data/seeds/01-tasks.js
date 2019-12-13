@@ -5,9 +5,10 @@ exports.seed = function(knex) {
     .then(function () {
       // Inserts seed entries
       return knex('tasks').insert([
-        {task_desc: "make some thing", completed: 0, task_notes: 'note'},
-        {task_desc: "break some thing", completed: 1, task_notes: 'note'},
-        {task_desc: "shake some thing", completed: 1, task_notes: 'note'}
+        {task_desc: "make something", completed: 0, task_notes: 'note'},
+        {task_desc: "break something", completed: 1, task_notes: 'note'},
+        {task_desc: "shake something", completed: 1, task_notes: 'note'},
+        {task_desc: "bake something", completed: 1, task_notes: 'note'}
       ]);
     });
 };
