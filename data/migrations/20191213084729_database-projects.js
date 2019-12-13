@@ -54,7 +54,7 @@ return knex.schema
         .notNullable()
 
     tbl.string('project_desc', 255)
-        .notNullable()
+      
 
     tbl.boolean('completed')
     .notNullable()
