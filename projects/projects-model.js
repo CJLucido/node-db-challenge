@@ -37,25 +37,25 @@ function getProjects(){ //don't really want to do this mapping on a list of all 
 
    function getTasks(){
     return  db('tasks')
-    .join('projects', 'projects.task_id', 'tasks.id')
-       .select('*'
-        //    'tasks.task_id',
-        //    'tasks.task_desc',
+    .leftJoin('projects', 'projects.task_id', 'tasks.id')
+       .select(
+            'tasks.id',
+       'tasks.task_desc',
         //    'tasks.task_notes',
-        //    'tasks.completed',
-        //    'project_name',
-        //    'project_desc'
+            'tasks.completed',
+            'project_name',
+           'project_desc'
        )
 
         .then(tasks => {
             return( tasks.map(task => {
     
               return  {
-                    id: task.task_id,
+                    id: task.id,
                     task_desc: task.task_desc ? task.task_desc : null,
                     completed: Boolean(task.completed),
-                    project_name: task.project_name ? task.project_name : null,
-                    project_desc: task.project_desc ? task.project_desc : null
+                    project_name: task.project_name ? task.project_name : "not assigned Project",
+                    project_desc: task.project_desc ? task.project_desc : "not assigned Project"
                 }
             }) )
         })

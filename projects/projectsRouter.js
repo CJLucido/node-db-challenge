@@ -36,11 +36,11 @@ const dbMethod = require('./projects-model')
 
 // }).then(resource => {console.log('this is new resource', resource)})
 
-dbMethod.createTask(
-    {task_desc: 'besdcing'
+// dbMethod.createTask(
+//     {task_desc: 'besdcing'
 
 
-}).then(task => {console.log('this is new task', task)})
+// }).then(task => {console.log('this is new task', task)})
 
 
  router.get('/', (req, res) => {
