@@ -17,7 +17,7 @@ function getResources(){
    
 }
 
-function getProjects(){
+function getProjects(){ //don't really want to do this mapping on a list of all the results because of the cost to the db, it's ok to do it for a find by id but not here
     return  db('projects')
        .select('*')
        .then(projects => {
@@ -37,26 +37,25 @@ function getProjects(){
 
    function getTasks(){
     return  db('tasks')
-       .select(
-           'tasks.id',
-           'tasks.task_desc',
-           'tasks.task_notes',
-           'tasks.completed',
-           'project_name',
-           'project_desc'
-
-       
+    .join('projects', 'projects.task_id', 'tasks.id')
+       .select('*'
+        //    'tasks.task_id',
+        //    'tasks.task_desc',
+        //    'tasks.task_notes',
+        //    'tasks.completed',
+        //    'project_name',
+        //    'project_desc'
        )
-        .join('projects', 'task_id', 'tasks.id')
+
         .then(tasks => {
             return( tasks.map(task => {
     
               return  {
-                    id: task.id,
-                    task_desc: task.task_desc,
+                    id: task.task_id,
+                    task_desc: task.task_desc ? task.task_desc : null,
                     completed: Boolean(task.completed),
-                    project_name: task.project_name,
-                    project_desc: task.project_desc
+                    project_name: task.project_name ? task.project_name : null,
+                    project_desc: task.project_desc ? task.project_desc : null
                 }
             }) )
         })
@@ -67,7 +66,7 @@ function getProjects(){
             .select('*')
             .where({id})
             .first()
-            .then(project => {
+            .then(
                project => {
         
                   return  {
@@ -78,7 +77,7 @@ function getProjects(){
                         task_id: project.task_id
                     }
                 }
-            })
+            )
             //.update('complete',  Boolean())
             // .where({complete: 1})
             // .update({complete: true})
@@ -91,23 +90,36 @@ function findResourceId(id){
             .first()
 }
 function findTaskId(id){
-    return db('tasks')
-            .select('*')
-            .where({id})
-            .first()
-            .then(task => {
-           
-                  return  {
-                        id: task.id,
-                        task_desc: task.task_desc,
-                        completed: Boolean(task.completed),
-                        project_name: task.project_name,
-                        project_desc: task.project_desc
-                    }
-               
-            })
+    
+    return   db('tasks')
+   
+    .select('*'
+        // 'projects.task_id',
+        // 'tasks.id',
+        // 'tasks.task_desc',
+        // 'tasks.task_notes',
+        // 'tasks.completed',
+        // 'projects.project_name',
+        // 'projects.project_desc'
+    )
+     .where({'tasks.id': id})
+     .first()
+//   .then(task => { console.log("this is find task",task)})
 
-}
+//         if(id == task.task_id){
+//         return  {
+//             id: task.task_id,
+//             task_desc: task.task_desc,
+//             completed: Boolean(task.completed),
+//             project_name: task.project_name,
+//             project_desc: task.project_desc
+//         }
+//  }
+
+       
+//                   }
+//          )
+    }
 
    function createProject(projectData){
     return db('projects')
@@ -134,7 +146,7 @@ function createTask(taskData){
             .insert(taskData, 'id') 
             .then(ids =>{
                 const id = ids[0]
-
+                console.log("this is taskdata id", id)
                return findTaskId(id)
             })
 }
