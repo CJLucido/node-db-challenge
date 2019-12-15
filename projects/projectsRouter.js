@@ -4,7 +4,7 @@ const router = express.Router()
 
 const dbMethod = require('./projects-model')
 
-//  dbMethod.getResources().then(resources => {console.log('this is resources', resources)})
+  dbMethod.getResources().then(resources => {console.log('this is resources', resources)})
 
 //  dbMethod.getProjects().then(projects => {console.log('this is projects', projects)})
 
@@ -55,9 +55,21 @@ const dbMethod = require('./projects-model')
         })
  })
 
+//  router.get('/:id', (req, res) => {//This wont work if resources is a ending tag after projects as well
+
+//     dbMethod.findById(req.params.id)
+//         .then(projects => {
+//             res.status(200).json(projects)
+//         })
+//         .catch(err => {
+//             console.log('err projects', err)
+//             res.status(500).json({error: "Internal GET projects err"})
+//         })
+//  })
+
  router.post('/', (req, res) => {
 
-    dbMethod.createProjects()
+    dbMethod.createProject(req.body)
         .then(project => {
             res.status(200).json(project)
         })

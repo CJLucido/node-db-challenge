@@ -8,7 +8,8 @@ module.exports = {
     getTasks,
     createProject,
     createResource,
-    createTask
+    createTask,
+    findById
 }
 
 function getResources(){
@@ -67,16 +68,19 @@ function getProjects(){ //don't really want to do this mapping on a list of all 
             .where({id})
             .first()
             .then(
+                
                project => {
         
                   return  {
-                        id: project.id,
+                        id: id, //removed project.
                        project_name: project.project_name,
                         project_desc: project.project_desc,
                         completed: Boolean(project.completed),
                         task_id: project.task_id
                     }
                 }
+
+            
             )
             //.update('complete',  Boolean())
             // .where({complete: 1})
@@ -126,7 +130,7 @@ function findTaskId(id){
     .insert(projectData, 'id') 
     .then(ids =>{
         const id = ids[0]
-
+            console.log(id)
        return findById(id)
     })
    }
