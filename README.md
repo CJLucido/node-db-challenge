@@ -40,11 +40,19 @@ Demonstrate your understanding of this week's concepts by answering the followin
 
 - [ ] Explain the difference between `Relational Databases` and `SQL`.
 
+A relational database can store massive amounts of data in tables and can be used to understand connections between those tables. SQL is at the heart of relational databases as the language used to ask questions about the connections. SQL is a query language, it literally stands for structured query language.
+
 - [ ] Why do tables need a `primary key`?
+
+Tables need a primary key so that fields can allow for data cells to match across multiple records. A primary key acts as a unique identifier despite the potential for other fields to have the same information.
 
 - [ ] What is the name given to a table column that references the primary key on another table.
 
+This is called a Foreign Key, and a table can have more than one.
+
 - [ ] What do we need in order to have a _many to many_ relationship between two tables.
+
+A third table that bridges the gap (a junction/bridge table that splits the relationship into 2 many to 1 relationships).
 
 ## Minimum Viable Product
 
